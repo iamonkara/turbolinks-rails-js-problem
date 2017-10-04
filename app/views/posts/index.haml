@@ -14,7 +14,7 @@
         e.stopPropagation();
         e.preventDefault();
 
-        $("#something_form").submit();
+        Rails.fire($("#something_form")[0], "submit");
 
       });
 
