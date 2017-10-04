@@ -1,0 +1,21 @@
+%h2 Here is some Remote Form which should render a javascript alert. But Turbolinks is interfering rendeing JS as plain text.
+
+= form_tag post_something_path("filler", format: :js), id: "something_form", method: :post, remote: true, format: :js do
+
+  = text_area_tag 'body', nil, rows: 10, cols: 25
+
+  %a#post_something{:href => "#!"}  Submit Me
+
+
+- content_for :javascript do
+  :javascript
+    $(document).ready(function(){
+      $("#post_something").click(function(e){
+        e.stopPropagation();
+        e.preventDefault();
+
+        $("#something_form").submit();
+
+      });
+
+    });
